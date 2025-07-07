@@ -1,4 +1,3 @@
-# gui.py
 
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
@@ -16,15 +15,15 @@ class LeanTortoiseApp:
         self.root.geometry("900x600")
         self.root.configure(bg="#0f0f0f")
         self.root.minsize(800, 500)
-        self.root.attributes('-alpha', 0.0)  # Start transparent
+        self.root.attributes('-alpha', 0.0)  
         self.fade_in()
 
-        self.enable_blur()  # Windows 10+ only
+        self.enable_blur()  
 
         self.selected_folder = tk.StringVar()
         self.suspicious_files = []
 
-        self.style = Style("darkly")  # Use ttkbootstrap dark theme
+        self.style = Style("darkly") 
         self.build_ui()
 
     def fade_in(self):
@@ -44,27 +43,27 @@ class LeanTortoiseApp:
                 ("AnimationId", ctypes.c_int)
             ]
             accent_policy = ctypes.Structure()
-            accent_policy.AccentState = 3  # ACCENT_ENABLE_BLURBEHIND
-            accent_policy.GradientColor = 0x01000000  # Transparent
+            accent_policy.AccentState = 3  
+            accent_policy.GradientColor = 0x01000000  
             data = ctypes.pointer(accent_policy)
             size = ctypes.sizeof(accent_policy)
             ctypes.windll.user32.SetWindowCompositionAttribute(hwnd, ctypes.byref(data))
         except:
-            pass  # No blur on non-Windows or older OS
+            pass 
 
     def build_ui(self):
-        # App Title
+   
         title = ttk.Label(self.root, text="🛡️ Leantortoise Scanner", font=("Segoe UI", 24, "bold"), foreground="#00FFAA", background="#0f0f0f")
         title.pack(pady=(20, 10))
 
-        # Select Folder Button
+
         folder_btn = ttk.Button(self.root, text="📁 Select Folder", style="success.TButton", command=self.select_folder)
         folder_btn.pack(pady=10)
 
         self.path_label = ttk.Label(self.root, text="", font=("Segoe UI", 10), background="#0f0f0f", foreground="#ccc")
         self.path_label.pack()
 
-        # Scan & Delete Buttons
+   
         btn_frame = ttk.Frame(self.root)
         btn_frame.pack(pady=15)
 
@@ -77,15 +76,15 @@ class LeanTortoiseApp:
         self.junk_btn = ttk.Button(btn_frame, text="🧹 Clean Junk", style="secondary.TButton", command=self.clean_junk)
         self.junk_btn.grid(row=0, column=2, padx=15)
 
-        # Progress bar
+     
         self.progress = ttk.Progressbar(self.root, length=600, mode='determinate', style="info.Horizontal.TProgressbar")
         self.progress.pack(pady=15)
 
-        # Log box
+      
         self.log_box = tk.Text(self.root, height=15, width=100, bg="#111", fg="#0f0", font=("Consolas", 11), borderwidth=0)
         self.log_box.pack(padx=30, pady=(0, 20))
 
-        # Exit button
+  
         exit_btn = ttk.Button(self.root, text="⏹ Exit", style="light.TButton", command=self.root.quit)
         exit_btn.pack(pady=(0, 10))
 
