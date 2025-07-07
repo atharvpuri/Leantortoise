@@ -57,8 +57,3 @@ Leantortoise/
 
 
 This project is licensed under the MIT License.
-✅ Optional: requirements.txt
-txt
-Copy
-Edit
-ttkbootstrap
